@@ -3,6 +3,8 @@
  */
 package jackson.rick;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,14 +13,17 @@ public class Parser {
     private StringBuilder result;
     private String clock;
     private String period;
-    private String[] time;
+    private List<String> time;
     
     public Parser(String input) {
         this.input = new StringBuilder(input);
         this.result = new StringBuilder();
-        this.clock = "";
-        this.period = "";
-        this.time = new String[2];
+        this.clock = "Civilian";
+        this.period = "Before";
+        this.time = new ArrayList<>(2);
+        this.time.add("12");
+        this.time.add("00");
+        parse();
     }
     
     public Pattern getClockPattern() {
@@ -90,12 +95,16 @@ public class Parser {
     }
     
     public void setTime(StringBuilder sb) {
-        time[0] = sb.substring(0, sb.length()-2);
-        time[1] = sb.substring(sb.length()-2);
+        time.set(0, sb.substring(0, sb.length()-2));
+        time.set(1, sb.substring(sb.length()-2));
     }
     
-    public String[] getTime() {
+    public List<String> getTime() {
         return time;
+    }
+    
+    public String getTime(int index) throws ArrayIndexOutOfBoundsException {
+        return time.get(index);
     }
     
     public void parse() {

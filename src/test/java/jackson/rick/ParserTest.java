@@ -84,7 +84,7 @@ public class ParserTest {
     public void getTimeTest() {
         parser.setTime(new StringBuilder("1200"));
         String expected = "12";
-        String actual = parser.getTime()[0];
+        String actual = parser.getTime(0);
         System.out.println("Expected : " + expected);
         System.out.println("Actual   : " + actual);
         assertEquals(String.format("I expected the result to be: %s", expected),
